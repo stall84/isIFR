@@ -99,7 +99,7 @@ namespace isIFR.Controllers
           
             ViewBag.metarRes = METARs.flight_rules;
             ViewBag.airportName = Name.name;
-            ViewBag.sanitized = Sanitized.sanitized;
+            ViewBag.sanitized = $"METAR: {Sanitized.sanitized}";
             
 
             
