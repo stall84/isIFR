@@ -5,14 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace isIFR.Models
 {
-    public class METAR
+    public class AirportCode
     {
-       [Display (Name = "Flight Rules")]
-       public string flight_rules { get; set; }
-
-        //public List<string> clouds { get; set; }
+        [Required]
+        [MinLength(4, ErrorMessage = "Please enter ICAO 4-character code, e.g. KATL")]
+        public string code { get; set; }
     }
 }
