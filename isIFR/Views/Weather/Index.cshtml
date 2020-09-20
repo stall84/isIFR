@@ -3,34 +3,46 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-@section Scripts {
-<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
-<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
-}
 
-<div class="text-center container">
-   
+
+<div id="vueApp" class="text-center container">
+
     <div class="container-fluid">
-        
-            <div>
-                <h1 class="display-4">Check Current Flight Rules For Airport</h1>
-                <form id="aiport-form" asp-action="Index">
-                    <div class="form-group">
-                        <label asp-for="code">Enter ICAO Airport Code</label>
-                        <input asp-for="code" id="airportFormInput" class="form-control" placeholder="e.g. KATL" />
-                        <span asp-validation-for="code"></span>
-                        <br />
-                        <input class="btn btn-primary" type="submit" value="Go" />
-                    </div>
-                </form>
-                <br />
-                <div id="condition-holder">
-                    <h1 class="display-3">@ViewBag.airportName</h1>
+
+        <div>
+            <header class="mb-5" id="main-header">
+                <h1 id="main-header-text">Flight Rules & Airport Quickview</h1>
+            </header>
+            <form class="mt-5 mb-5" asp-action="Index">
+                <div id="aiport-form" class="form-group">
+                    <label id="form-label" asp-for="code">Enter ICAO Airport Code</label>
+                    <input asp-for="code" id="airport-form-input" class="form-control text-center" placeholder="e.g. KATL" />
+                    <span class="text-danger" asp-validation-for="code"></span>
                     <br />
-                    <h1 class="display-3">@ViewBag.metarRes</h1>
-                    <h2 id="rawMetar" class="display-4">Raw METAR: @ViewBag.sanitized</h2>
+                    <button id="main-button" class="btn" type="submit">Go</button>
+                    @*<input id="main-button" class="btn btn-lg" type="submit" value="Go" />*@
+                </div>
+            </form>
+            <br />
+            <div class="mt-5" id="condition-holder">
+                <div>
+                    <h3 class="display-4"><span id=airport-name-span>@ViewBag.airportName</span></h3>
+                </div>
+                <div>
+                    <h3 class="display-4"><span id="flt-rule-span">@ViewBag.metarRes</span></h3>
+                </div>
+                <div>
+                    <h4 id="rawMetar" class="display-4"><span id="metar-span">@ViewBag.sanitized</span></h4>
                 </div>
             </div>
-        
+        </div>
+
     </div>
 </div>
+
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+}
+
