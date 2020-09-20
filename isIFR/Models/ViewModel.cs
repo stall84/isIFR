@@ -5,14 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace isIFR.Models
 {
-    public class METAR
+    public class ViewModel
     {
-       [Display (Name = "Flight Rules")]
-       public string flight_rules { get; set; }
-
-        //public List<string> clouds { get; set; }
+        public string Code { get; set; }
+        public string flight_rules { get; set; }
     }
 }

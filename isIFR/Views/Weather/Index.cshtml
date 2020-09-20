@@ -1,0 +1,30 @@
+﻿@model isIFR.Models.AirportCode
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center container">
+    <h1 class="display-3">Welcome</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="display-4">Check Current Flight Rules For Airport</h2>
+                <form id="aiport-form" asp-action="Index">
+                    <div class="form-group">
+                        <label asp-for="code">Enter ICAO Airport Code</label>
+                        <input asp-for="code" id="airportFormInput" class="form-control" placeholder="e.g. KATL" />
+                        <input class="btn btn-primary" type="submit" value="Go" />
+                    </div>
+                </form>
+                <br />
+                <div id="condition-holder" class="container">
+                    <h1 class="display-4">@ViewBag.airportName</h1>
+                    <br />
+                    <h1 class="display-4">@ViewBag.metarRes</h1>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
