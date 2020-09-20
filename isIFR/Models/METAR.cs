@@ -13,6 +13,5 @@ namespace isIFR.Models
        [Display (Name = "Flight Rules")]
        public string flight_rules { get; set; }
 
-        //public List<string> clouds { get; set; }
     }
 }

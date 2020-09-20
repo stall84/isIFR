@@ -22,6 +22,8 @@ namespace isIFR.Controllers
 
         public AirportName Name { get; set; }
 
+        public FullReport Sanitized { get; set; }
+
         const string BASE_URL = "https://avwx.rest/api/";
        
 
@@ -47,18 +49,28 @@ namespace isIFR.Controllers
 
             var message = new HttpRequestMessage();             // instantiate HttpRequestMessage object. Will eventually hold all parts of our GET request
             var message2 = new HttpRequestMessage();
+            var message3 = new HttpRequestMessage();
+
 
             message.Method = HttpMethod.Get;
             message2.Method = HttpMethod.Get;
+            message3.Method = HttpMethod.Get;
+
 
             message.RequestUri = new Uri($"{BASE_URL}metar/{airportCode}?token={_config.API_KEY}");
             message2.RequestUri = new Uri($"{BASE_URL}station/{airportCode}?token={_config.API_KEY}");
+            message3.RequestUri = new Uri($"{BASE_URL}metar/{airportCode}?token={_config.API_KEY}");
+
 
             var client = _clientFactory.CreateClient();         // Using injected clientFactory, create new local object
             var client2 = _clientFactory.CreateClient();
+            var client3 = _clientFactory.CreateClient();
+
 
             var response = await client.SendAsync(message);     // Async sending of GET request with response stored in local object
             var response2 = await client2.SendAsync(message2);
+            var response3 = await client3.SendAsync(message3);
+
 
             if (response.IsSuccessStatusCode)                   // If 200-Range Response
             {
@@ -79,46 +91,24 @@ namespace isIFR.Controllers
             {
                 Name = null;
             }
-
+            if (response3.IsSuccessStatusCode)
+            {
+                using var responseStream3 = await response3.Content.ReadAsStreamAsync();
+                Sanitized = await JsonSerializer.DeserializeAsync<FullReport>(responseStream3);
+            }
+          
             ViewBag.metarRes = METARs.flight_rules;
             ViewBag.airportName = Name.name;
+            ViewBag.sanitized = Sanitized.sanitized;
+            
 
-            Console.WriteLine($"Response from API after POST: {METARs.flight_rules}");
+            
             return View();
-           //return RedirectToAction(nameof(Display));                                                               // Return the view passing in the field parsed from response
+                                                                        // Return the view passing in the field parsed from response
             
         }
 
-        //public IActionResult Display()
-        //{
-        //    ViewBag.Message = "Dispaly View Rendered";
-        //    Console.WriteLine($"METARs at Display View render: {METARs.flight_rules}");
-        //    return View(METARs);
-        //}
-
-        //public async Task<IActionResult> Display()
-        //{
-        //    var message = new HttpRequestMessage();             // instantiate HttpRequestMessage object. Will eventually hold all parts of our GET request
-        //    message.Method = HttpMethod.Get;
-        //    message.RequestUri = new Uri($"{BASE_URL}/{_airportCode}?token={_config.API_KEY}");
-
-        //    var client = _clientFactory.CreateClient();         // Using injected clientFactory, create new local object
-
-        //    var response = await client.SendAsync(message);     // Async sending of GET request with response stored in local object
-
-        //    if (response.IsSuccessStatusCode)                   // If 200-Range Response
-        //    {
-        //        using var responseStream = await response.Content.ReadAsStreamAsync();         // 'using' statement to preserve/garbage-collect resources. Read stream of JSON response into local object
-        //        METARs = await JsonSerializer.DeserializeAsync<METAR>(responseStream);         // Deserialize response stream into our METARs property of type METAR. 
-        //    }                                                                                  // ..If this were more than 1 property on the response, use IEnumerable & for-loop through on the View
-        //    else
-        //    {
-        //        METARs = null;                                                                  // Set Property to null if failed call
-        //    }
-        //    Console.WriteLine($"Response from API: {response.Content}");
-        //    return View(METARs);                                                                // Return the view passing in the field parsed from response                   
-        //}
-
+     
         
     }
 }
