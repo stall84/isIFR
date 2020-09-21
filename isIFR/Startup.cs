@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+
 namespace isIFR
 {
     public class Startup
@@ -54,6 +55,9 @@ namespace isIFR
             app.UseRouting();
 
             app.UseAuthorization();
+
+            
+
 
             app.UseEndpoints(endpoints =>
             {

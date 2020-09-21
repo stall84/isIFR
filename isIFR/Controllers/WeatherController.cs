@@ -57,9 +57,9 @@ namespace isIFR.Controllers
             message3.Method = HttpMethod.Get;
 
 
-            message.RequestUri = new Uri($"{BASE_URL}metar/{airportCode}?token={_config.API_KEY}");
-            message2.RequestUri = new Uri($"{BASE_URL}station/{airportCode}?token={_config.API_KEY}");
-            message3.RequestUri = new Uri($"{BASE_URL}metar/{airportCode}?token={_config.API_KEY}");
+            message.RequestUri = new Uri($"{BASE_URL}metar/{airportCode}?token=Ee2dwfrB1XRnuxsGjByGWD9C3YIuZajZMRgfhluZzL0");
+            message2.RequestUri = new Uri($"{BASE_URL}station/{airportCode}?token=Ee2dwfrB1XRnuxsGjByGWD9C3YIuZajZMRgfhluZzL0");
+            message3.RequestUri = new Uri($"{BASE_URL}metar/{airportCode}?token=Ee2dwfrB1XRnuxsGjByGWD9C3YIuZajZMRgfhluZzL0");
 
 
             var client = _clientFactory.CreateClient();         // Using injected clientFactory, create new local object
