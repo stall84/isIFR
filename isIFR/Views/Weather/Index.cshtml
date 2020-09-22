@@ -13,36 +13,50 @@
             <header class="mb-5" id="main-header">
                 <h1 id="main-header-text">Flight Rules & Airport Quickview</h1>
             </header>
-            <form class="mt-5 mb-5" asp-action="Index">
+            <form class="mt-5 mb-2" asp-action="Index" >
                 <div id="aiport-form" class="form-group">
                     <label id="form-label" asp-for="code">Enter ICAO Airport Code</label>
                     <input asp-for="code" id="airport-form-input" class="form-control text-center" placeholder="e.g. KATL" />
                     <span class="text-danger" asp-validation-for="code"></span>
                     <br />
                     <button id="main-button" class="btn" type="submit">Go</button>
-                    @*<input id="main-button" class="btn btn-lg" type="submit" value="Go" />*@
                 </div>
             </form>
             <br />
-            <div class="mt-5" id="condition-holder">
-                <div>
-                    <h3 class="display-4"><span id=airport-name-span>@ViewBag.airportName</span></h3>
+            <div class="mt-2" id="condition-holder" v-show="apiResponse" >
+                <div >
+                    <h3 class="display-4 mb-3" ><span id=airport-name-span>@ViewBag.airportName</span></h3>
                 </div>
                 <div>
-                    <h3 class="display-4"><span id="flt-rule-span">@ViewBag.metarRes</span></h3>
+                    <h3 class="display-4 mb-3" ><span id="flt-rule-span">@ViewBag.metarRes</span></h3>
                 </div>
                 <div>
                     <h4 id="rawMetar" class="display-4"><span id="metar-span">@ViewBag.sanitized</span></h4>
                 </div>
+              
             </div>
         </div>
 
     </div>
 </div>
 
+
+
 @section Scripts {
     <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    
 }
 
+
+<script type="text/javascript">
+    var app = new Vue({
+        el: '#vueApp',
+        data: {
+            testing: 'SUP',
+            apiResponse: '@ViewBag.airportName',
+        },
+        mounted: function () {
+            this.loadEvents();
+        },
+    });</script>
