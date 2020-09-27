@@ -10,13 +10,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     <link rel="stylesheet" media="screen and (min-width:750px)" href="~/css/styles.css" />
     <link rel="stylesheet" media="screen and (max-width:749px)" href="~/css/mobile-styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
             <div class="container">
                 <a id="home-link" class="navbar-brand" asp-area="" asp-controller="Weather" asp-action="Index">isIFR?</a>
-                
+
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                 </div>
             </div>
@@ -38,6 +40,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    
     @RenderSection("Scripts", required: false)
 </body>
 </html>
